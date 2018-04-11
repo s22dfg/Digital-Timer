@@ -20,7 +20,9 @@ class ViewController: UIViewController {
     /*
          myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     */
-        timerSwitch.setOn(false, animated: true)
+        // all possible
+        //timerSwitch.setOn(false, animated: true)
+        timerSwitch.isOn = false
     }
 
 /* @objc */
