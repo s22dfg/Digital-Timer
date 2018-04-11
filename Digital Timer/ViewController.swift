@@ -11,26 +11,36 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet var timeLabel: UILabel!
+    @IBOutlet var timerSwitch: UISwitch!
     
     var myTimer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        
+        /*
+         myTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+         */
+        timerSwitch.setOn(false, animated: true)
     }
 
-    @objc func updateTime() {
+/* @objc */
+    func updateTime() {
         let date = Date()
         let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss a"
         formatter.dateFormat = "HH:mm:ss EE YYYY"
         timeLabel.text = formatter.string(from: date)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func timerStarter(_ sender: Any) {
+        
+        if timerSwitch.isOn == true {
+            // 클로저(closure)의 사용
+            myTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {(myTimer) in self.updateTime()})
+        } else {
+            myTimer.invalidate()
+        }
     }
-
-
 }
 
